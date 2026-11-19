@@ -1,0 +1,7 @@
+.env export-ignore
+.env.* export-ignore
+server export-ignore
+server.exe export-ignore
+coverage.out export-ignore
+trivy-results.sarif export-ignore
+latest-app.zip export-ignore
