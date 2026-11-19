@@ -1,0 +1,10 @@
+swagger: "2.0"
+info:
+  title: "Delcom Blog API"
+  description: "Dokumentasi REST API Delcom Blog Multi-Tier & AI Generator"
+  version: "1.0"
+host: "localhost:8081"
+basePath: "/api"
+schemes:
+  - "http"
+  - "https"

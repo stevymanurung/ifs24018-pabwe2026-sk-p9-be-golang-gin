@@ -1,0 +1,74 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Delcom Blog API",
+    "description": "Dokumentasi REST API Delcom Blog Multi-Tier & AI Generator",
+    "version": "1.0"
+  },
+  "host": "localhost:8081",
+  "basePath": "/api",
+  "schemes": [
+    "http",
+    "https"
+  ],
+  "paths": {
+    "/public/categories": {
+      "get": {
+        "summary": "Daftar Kategori Publik",
+        "responses": {
+          "200": { "description": "Success" }
+        }
+      }
+    },
+    "/public/posts": {
+      "get": {
+        "summary": "Daftar Artikel Publik",
+        "parameters": [
+          { "name": "category", "in": "query", "type": "string" },
+          { "name": "q", "in": "query", "type": "string" }
+        ],
+        "responses": {
+          "200": { "description": "Success" }
+        }
+      }
+    },
+    "/auth/register": {
+      "post": {
+        "summary": "Registrasi Pengguna",
+        "responses": {
+          "201": { "description": "Created" }
+        }
+      }
+    },
+    "/auth/login": {
+      "post": {
+        "summary": "Login Pengguna",
+        "responses": {
+          "200": { "description": "Success" }
+        }
+      }
+    },
+    "/posts": {
+      "get": {
+        "summary": "Daftar Artikel Penulis",
+        "responses": {
+          "200": { "description": "Success" }
+        }
+      },
+      "post": {
+        "summary": "Tambah Artikel",
+        "responses": {
+          "201": { "description": "Created" }
+        }
+      }
+    },
+    "/posts/ai-generate": {
+      "post": {
+        "summary": "Generate Draf Artikel AI",
+        "responses": {
+          "200": { "description": "Success" }
+        }
+      }
+    }
+  }
+}
