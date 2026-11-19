@@ -1,32 +1,32 @@
 package main
 
 import (
-	"fmt"
-	"log"
-	"net/http"
-
 	"app/internal/config"
 	"app/internal/database"
+	"app/internal/models"
 	"app/internal/server"
+	"golang.org/x/crypto/bcrypt"
+	"log"
 )
 
 func main() {
-	cfg := config.LoadConfig()
-
-	db, err := database.ConnectDB(cfg)
+	cfg := config.Load()
+	db, err := database.Open(cfg)
 	if err != nil {
-		log.Fatalf("Gagal terhubung ke database: %v", err)
+		log.Fatalf("database connection failed: %v", err)
 	}
-
-	if err := database.EnsureSchema(db, cfg); err != nil {
-		log.Fatalf("Gagal menyiapkan database: %v", err)
+	var count int64
+	db.Model(&models.User{}).Where("username = ?", cfg.AdminUsername).Count(&count)
+	if count == 0 {
+		hash, e := bcrypt.GenerateFromPassword([]byte(cfg.AdminPassword), bcrypt.DefaultCost)
+		if e != nil {
+			log.Fatal(e)
+		}
+		db.Create(&models.User{Username: cfg.AdminUsername, Email: "admin@delcom.local", Password: string(hash), Role: "admin"})
 	}
-
-	r := server.SetupRouter(cfg, db)
-
-	addr := fmt.Sprintf(":%s", cfg.AppPort)
-	log.Printf("Server berjalan di http://localhost%s", addr)
-	if err := http.ListenAndServe(addr, server.RestoreOriginalPath(r)); err != nil {
-		log.Fatalf("Server berhenti karena error: %v", err)
+	app := server.New(db, cfg)
+	log.Printf("Delcom Blog API listening on :%s", cfg.Port)
+	if err = app.Router().Run(":" + cfg.Port); err != nil {
+		log.Fatal(err)
 	}
 }

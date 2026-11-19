@@ -1,7 +1,8 @@
-# Environment files
+# Environment files and secrets
 .env
+.env.*
 
-# Binaries - MUST start with leading slash to avoid ignoring internal/server/
+# Binaries
 /server
 /server.exe
 /main
@@ -9,12 +10,13 @@
 /app
 /app.exe
 
-# Test artifacts & coverage
+# Test artifacts
 *.out
 *.test
 coverage.html
+coverage/
 
-# IDE & OS
+# IDE and OS
 .vscode/
 .idea/
 *.swp

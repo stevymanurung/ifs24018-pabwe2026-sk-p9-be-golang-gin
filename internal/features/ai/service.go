@@ -14,7 +14,7 @@ var (
 	ErrTopicRequired = errors.New("field topic wajib diisi")
 )
 
-type Service interface {
+type DraftService interface {
 	GenerateDraft(req *GenerateDraftRequest) (*DraftResponse, error)
 }
 
@@ -24,7 +24,7 @@ type service struct {
 	model        string
 }
 
-func NewService(cfg *config.Config, openAIClient OpenAIClient, searchClient SearchClient) Service {
+func NewService(cfg *config.Config, openAIClient OpenAIClient, searchClient SearchClient) DraftService {
 	model := cfg.OpenAIModel
 	if model == "" {
 		model = "gpt-4o-mini"

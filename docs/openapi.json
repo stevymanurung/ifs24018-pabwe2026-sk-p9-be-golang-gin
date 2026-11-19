@@ -1,0 +1,13 @@
+{
+ "openapi":"3.0.3",
+ "info":{"title":"Delcom Blog API","version":"1.0.0"},
+ "servers":[{"url":"http://localhost:8081"}],
+ "paths":{
+  "/health":{"get":{"summary":"Health check","responses":{"200":{"description":"OK"}}}},
+  "/api/public/posts":{"get":{"summary":"List published posts","responses":{"200":{"description":"OK"}}}},
+  "/api/auth/register":{"post":{"summary":"Register author","responses":{"201":{"description":"Created"}}}},
+  "/api/auth/login":{"post":{"summary":"Login","responses":{"200":{"description":"OK"}}}},
+  "/api/posts":{"get":{"summary":"List author posts","responses":{"200":{"description":"OK"}}},"post":{"summary":"Create post","responses":{"201":{"description":"Created"}}}},
+  "/api/posts/ai-generate":{"post":{"summary":"Generate article with web search","responses":{"200":{"description":"OK"}}}}
+ }
+}
