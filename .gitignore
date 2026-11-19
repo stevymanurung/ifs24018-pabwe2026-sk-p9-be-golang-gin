@@ -1,0 +1,22 @@
+# Environment files
+.env
+
+# Binaries - MUST start with leading slash to avoid ignoring internal/server/
+/server
+/server.exe
+/main
+/main.exe
+/app
+/app.exe
+
+# Test artifacts & coverage
+*.out
+*.test
+coverage.html
+
+# IDE & OS
+.vscode/
+.idea/
+*.swp
+*.DS_Store
+Thumbs.db
